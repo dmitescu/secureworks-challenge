@@ -1,3 +1,4 @@
 class HorizontalBarChart():
-    def __init__(self, values):
-        self.values = values
+    def __init__(self, series, groups):
+        self.series = series
+        self.groups = groups

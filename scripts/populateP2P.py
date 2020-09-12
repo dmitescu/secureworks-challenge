@@ -5,7 +5,7 @@ import time
 from datetime import datetime
 
 def str_time_prop(start, end, prop):
-     ptime = start + prop * (end - start)
+    ptime = start + prop * (end - start)
 
     return ptime
 
@@ -27,29 +27,20 @@ cursor = conn.cursor()
 values = []
 
 for i in range(0, int(SAMPLE_SIZE/3)):
-    uid = random.randint(1, 1024)
     date = datetime.fromtimestamp(random_date(START_DATE, END_DATE1, random.random()))
-    duration = random.randint(1,4)
-
-    values.append((uid, date, duration))
+    values.append((date,))
 
     
-for i in range(0, int(SAMPLE_SIZE/5)):
-    uid = random.randint(1, 1024)
+for i in range(0, int(SAMPLE_SIZE/3)):
     date = datetime.fromtimestamp(random_date(START_DATE, END_DATE2, random.random()))
-    duration = random.randint(1,4)
-
-    values.append((uid, date, duration))
+    values.append((date,))
 
 
-for i in range(0, int(SAMPLE_SIZE/7)):
-    uid = random.randint(1, 1024)
-    date = datetime.fromtimestamp(random_date(START_DATE, END_DATE2, random.random()))
-    duration = random.randint(1,4)
+for i in range(0, int(SAMPLE_SIZE/3)):
+    date = datetime.fromtimestamp(random_date(END_DATE2, END_DATE1, random.random()))
+    values.append((date,))
 
-    values.append((uid, date, duration))
-
-r = cursor.executemany("INSERT INTO dashboard_downtime(deployment_id, date, duration) VALUES (?, ?, ?)", values)
+r = cursor.executemany("INSERT INTO dashboard_p2ppacket(date) VALUES (?)", values)
 
 conn.commit()
 
